@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Send queue · job-apply-agent{% endblock %}
+{% block heading %}Send queue{% endblock %}
+{% block content %}
+<p class="lede">
+  Scheduled applications in send order. The reason column shows exactly why the
+  timing engine chose that moment.
+</p>
+<section class="card">
+  <div class="table-wrap">
+    <table class="table">
+      <thead>
+        <tr><th>Due</th><th>Role</th><th>Company</th><th>Score</th><th>Why this time</th><th></th></tr>
+      </thead>
+      <tbody id="queue-body"></tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}<script>Queue.init();</script>{% endblock %}

@@ -1,0 +1,142 @@
+# ============================================================================
+#  job-apply-agent — main configuration
+#  Copy to config/config.yaml and edit. config.yaml is gitignored.
+# ============================================================================
+
+profile:
+  full_name: "Venkatesh Golle"
+  first_name: "Venkatesh"
+  last_name: "Golle"
+  email: "you@example.com"
+  phone: "+91 90000 00000"
+  city: "Hyderabad"
+  state: "Telangana"
+  country: "India"
+  postal_code: "500001"
+  address_line1: "Street address"
+  linkedin: "https://www.linkedin.com/in/your-handle"
+  github: "https://github.com/cyberintruder"
+  website: ""
+  headline: "Security Engineer — CEH, OSCP, CISSP"
+  years_experience: 8
+  current_company: "Current Co."
+  current_title: "Senior Security Engineer"
+  notice_period_days: 30
+  # Used verbatim by the ATS answer resolver
+  work_authorization:
+    india: "Citizen"
+    united_states: "Requires sponsorship"
+    european_union: "Requires sponsorship"
+  requires_sponsorship: true
+  willing_to_relocate: true
+  desired_salary: "As per industry standards"
+  desired_salary_number: 4500000        # numeric fallback for salary fields
+  salary_currency: "INR"
+  earliest_start_date: "+30d"           # relative or ISO date
+  # Voluntary self-identification — leave as "Decline to self identify" if preferred
+  gender: "Decline to self identify"
+  ethnicity: "Decline to self identify"
+  veteran_status: "I am not a protected veteran"
+  disability_status: "I do not wish to answer"
+  # Free-text the LLM uses when writing cover letters / answering "why this role"
+  pitch: >
+    Security engineer with 8 years across offensive security, cloud security and
+    detection engineering. OSCP, CEH and CISSP certified. I build the tooling that
+    finds problems before attackers do, and I like teams that treat security as an
+    engineering discipline rather than a checklist.
+
+# ---------------------------------------------------------------------------
+# Discovery — what the agent searches for on LinkedIn
+# ---------------------------------------------------------------------------
+searches:
+  - name: "Cloud security — India remote"
+    keywords: "Cloud Security Engineer"
+    location: "India"
+    remote: true                    # maps to LinkedIn f_WT=2
+    posted_within_hours: 48         # maps to f_TPR=r{seconds}
+    experience_levels: ["mid", "senior"]
+    easy_apply_only: false
+    max_results: 40
+
+  - name: "AppSec — Hyderabad"
+    keywords: "Application Security Engineer"
+    location: "Hyderabad, Telangana, India"
+    remote: false
+    posted_within_hours: 72
+    experience_levels: ["mid", "senior"]
+    easy_apply_only: false
+    max_results: 40
+
+  - name: "Detection engineering — anywhere"
+    keywords: "Detection Engineer OR Threat Detection"
+    location: "India"
+    remote: true
+    posted_within_hours: 96
+    experience_levels: ["senior"]
+    easy_apply_only: true
+    max_results: 25
+
+# ---------------------------------------------------------------------------
+# Matching — decides whether to apply and with which resume
+# ---------------------------------------------------------------------------
+matching:
+  min_score: 62               # 0-100. Below this the job is skipped.
+  auto_apply_score: 78        # At/above this, apply without human review.
+  use_llm_rerank: true        # Claude re-ranks the keyword shortlist
+  tailor_above_score: 70      # At/above this, generate a tailored resume
+  max_tailored_per_day: 12
+  # Hard filters applied before scoring
+  exclude_title_terms: ["intern", "sales", "recruiter", "manager of managers"]
+  exclude_companies: []
+  require_terms: []           # if set, the JD must contain at least one
+
+# ---------------------------------------------------------------------------
+# Timing — "the right resume at the right time"
+# ---------------------------------------------------------------------------
+timing:
+  # Applications land inside the hiring team's working hours, on days where
+  # recruiter response rates are highest, while the post is still fresh.
+  timezone_default: "Asia/Kolkata"
+  send_window_local: ["08:30", "11:00"]     # preferred local send window
+  fallback_window_local: ["14:00", "16:30"] # used if the primary window passed
+  preferred_weekdays: [1, 2, 3]             # Mon=0 ... Tue/Wed/Thu are best
+  allowed_weekdays: [0, 1, 2, 3, 4]         # never weekends by default
+  # Freshness: a post older than this is deprioritised, older than hard_max is dropped
+  ideal_freshness_hours: 24
+  max_freshness_hours: 168
+  # If a job is brand new and inside the window, go immediately (first-mover edge)
+  immediate_if_fresher_than_hours: 6
+  # Throughput guards so the account never looks like a bot
+  max_applications_per_day: 15
+  max_applications_per_hour: 4
+  min_minutes_between_applications: 7
+  jitter_minutes: 9
+
+# ---------------------------------------------------------------------------
+# Application channels
+# ---------------------------------------------------------------------------
+apply:
+  enable_linkedin_easy_apply: true
+  enable_external_ats: true
+  enable_email_channel: true
+  # Vendors the agent will drive end-to-end. Unknown vendors fall back to the
+  # generic form filler, which always stops for review before submitting.
+  ats_vendors: ["workday", "greenhouse", "lever", "ashby", "smartrecruiters", "generic"]
+  # Attach a cover letter when the form offers the field
+  write_cover_letter: true
+  # Screenshot every page the agent submits, for the audit trail in the UI
+  screenshot_evidence: true
+
+# ---------------------------------------------------------------------------
+# Manual channel — you screenshot a LinkedIn post, agent drafts the email
+# ---------------------------------------------------------------------------
+manual:
+  inbox_dir: "./inbox/screenshots"
+  processed_dir: "./processed"
+  # Where to send when the post names no address. null => park for review.
+  fallback_recipient: null
+  cc: []
+  signature: |
+    Regards,
+    Venkatesh Golle
+    +91 90000 00000 · https://www.linkedin.com/in/your-handle

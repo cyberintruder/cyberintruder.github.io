@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Review · job-apply-agent{% endblock %}
+{% block heading %}Review queue{% endblock %}
+{% block content %}
+<p class="lede">
+  Everything here stopped on purpose: the agent hit a required question it could not
+  answer truthfully, an email with no recipient, or a submit button it was told not
+  to press. Answer, then approve.
+</p>
+<div id="review-list" class="review-list"></div>
+{% endblock %}
+{% block scripts %}<script>Review.init();</script>{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · job-apply-agent{% endblock %}
+{% block heading %}Dashboard{% endblock %}
+{% block content %}
+<section class="kpis" id="kpis"></section>
+
+<section class="grid-2">
+  <div class="card">
+    <div class="card-head"><h2>Applications over time</h2><span class="muted">last 30 days</span></div>
+    <div id="chart-timeseries" class="chart"></div>
+  </div>
+  <div class="card">
+    <div class="card-head"><h2>Pipeline</h2><span class="muted">by status</span></div>
+    <div id="chart-status" class="chart"></div>
+  </div>
+</section>
+
+<section class="grid-3">
+  <div class="card">
+    <div class="card-head"><h2>Resume usage</h2></div>
+    <div id="chart-resumes" class="bars"></div>
+  </div>
+  <div class="card">
+    <div class="card-head"><h2>Top companies</h2></div>
+    <div id="chart-companies" class="bars"></div>
+  </div>
+  <div class="card">
+    <div class="card-head"><h2>Channels</h2></div>
+    <div id="chart-channels" class="bars"></div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-head"><h2>Activity</h2><span class="muted">most recent first</span></div>
+  <div id="activity" class="activity"></div>
+</section>
+{% endblock %}
+{% block scripts %}<script>Dashboard.init();</script>{% endblock %}

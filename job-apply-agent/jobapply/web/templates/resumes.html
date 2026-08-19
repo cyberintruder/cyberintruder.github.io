@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Resumes · job-apply-agent{% endblock %}
+{% block heading %}Resumes{% endblock %}
+{% block content %}
+<p class="lede">
+  The registry the agent picks from. Edit <code>resumes/index.yaml</code> to add a
+  variant; keywords drive the fast scoring pass, the summary is what Claude reads.
+</p>
+<div id="resume-grid" class="resume-grid"></div>
+<section class="card" id="tailored-card">
+  <div class="card-head"><h2>Tailored variants</h2><span class="muted">generated per job</span></div>
+  <div id="tailored-list" class="tailored-list"></div>
+</section>
+{% endblock %}
+{% block scripts %}<script>Resumes.init();</script>{% endblock %}

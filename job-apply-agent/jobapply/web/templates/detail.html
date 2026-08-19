@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Application · job-apply-agent{% endblock %}
+{% block heading %}<a href="/applications" class="back">← Applications</a>{% endblock %}
+{% block content %}
+<div id="detail" data-app-id="{{ app_id }}" class="detail-root">
+  <p class="muted">Loading…</p>
+</div>
+{% endblock %}
+{% block scripts %}<script>Detail.init();</script>{% endblock %}

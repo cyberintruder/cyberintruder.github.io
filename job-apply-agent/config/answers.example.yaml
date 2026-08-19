@@ -1,0 +1,62 @@
+# ============================================================================
+#  Answer bank — deterministic answers for ATS screening questions.
+#  Copy to config/answers.yaml. Checked BEFORE the LLM, so anything here is
+#  guaranteed, auditable, and free.
+#
+#  Matching is fuzzy: the question text is normalised (lowercased, punctuation
+#  stripped) and compared against each `match` phrase. First hit wins.
+# ============================================================================
+
+answers:
+  - match: ["years of experience", "total experience", "how many years"]
+    value: "8"
+
+  - match: ["are you legally authorized to work", "legally authorised to work"]
+    value: "Yes"
+
+  - match: ["will you now or in the future require sponsorship",
+            "require visa sponsorship", "need sponsorship"]
+    value: "Yes"
+
+  - match: ["notice period", "how soon can you join", "earliest start date"]
+    value: "30 days"
+
+  - match: ["expected salary", "salary expectation", "desired compensation",
+            "current ctc", "expected ctc"]
+    value: "As per industry standards"
+
+  - match: ["willing to relocate", "open to relocation"]
+    value: "Yes"
+
+  - match: ["have you previously worked for", "are you a former employee"]
+    value: "No"
+
+  - match: ["how did you hear about", "source", "referred by"]
+    value: "LinkedIn"
+
+  - match: ["gender"]
+    value: "Decline to self identify"
+
+  - match: ["race", "ethnicity", "hispanic or latino"]
+    value: "Decline to self identify"
+
+  - match: ["veteran"]
+    value: "I am not a protected veteran"
+
+  - match: ["disability"]
+    value: "I do not wish to answer"
+
+  - match: ["do you agree", "i certify", "terms and conditions", "privacy policy",
+            "i acknowledge"]
+    value: "Yes"
+
+# Questions matching any of these are NEVER auto-answered — they always go to
+# the review queue, no matter what the LLM thinks.
+never_auto_answer:
+  - "criminal"
+  - "felony"
+  - "conviction"
+  - "background check consent"
+  - "drug test"
+  - "security clearance"
+  - "current salary"

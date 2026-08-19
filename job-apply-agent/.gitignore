@@ -1,0 +1,27 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# secrets — never commit
+.env
+config/config.yaml
+config/answers.yaml
+secrets/
+*.token.json
+token.json
+credentials.json
+
+# runtime state
+data/*.db
+data/*.db-*
+data/test/
+data/browser/
+data/artifacts/
+data/generated/
+inbox/screenshots/*
+!inbox/screenshots/.gitkeep
+processed/

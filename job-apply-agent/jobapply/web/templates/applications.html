@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Applications · job-apply-agent{% endblock %}
+{% block heading %}Applications{% endblock %}
+{% block content %}
+<section class="card">
+  <div class="filters">
+    <input type="search" id="filter-q" placeholder="Search title or company…" autocomplete="off">
+    <select id="filter-status">
+      <option value="all">All statuses</option>
+      <option value="needs_review">Needs review</option>
+      <option value="scheduled">Scheduled</option>
+      <option value="in_progress">In progress</option>
+      <option value="submitted">Submitted</option>
+      <option value="failed">Failed</option>
+      <option value="matched">Matched</option>
+      <option value="skipped">Skipped</option>
+    </select>
+    <select id="filter-channel">
+      <option value="all">All channels</option>
+      <option value="linkedin_easy_apply">LinkedIn Easy Apply</option>
+      <option value="ats">External ATS</option>
+      <option value="email">Email</option>
+    </select>
+    <span class="muted" id="result-count"></span>
+  </div>
+  <div class="table-wrap">
+    <table class="table" id="apps-table">
+      <thead>
+        <tr>
+          <th>Role</th><th>Company</th><th>Score</th><th>Resume</th>
+          <th>Channel</th><th>Status</th><th>Scheduled</th><th></th>
+        </tr>
+      </thead>
+      <tbody id="apps-body"></tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}<script>Applications.init();</script>{% endblock %}

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}job-apply-agent{% endblock %}</title>
+  <link rel="stylesheet" href="/static/app.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🎯</text></svg>">
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark">◈</span>
+      <div>
+        <strong>job-apply</strong>
+        <small>agent</small>
+      </div>
+    </div>
+    <nav>
+      <a href="/"             class="{{ 'active' if page=='dashboard' }}"><i>▤</i> Dashboard</a>
+      <a href="/applications" class="{{ 'active' if page=='applications' }}"><i>▦</i> Applications</a>
+      <a href="/review"       class="{{ 'active' if page=='review' }}"><i>◎</i> Review <span id="nav-review-badge" class="badge hidden"></span></a>
+      <a href="/queue"        class="{{ 'active' if page=='queue' }}"><i>◷</i> Send queue <span id="nav-queue-badge" class="badge hidden"></span></a>
+      <a href="/resumes"      class="{{ 'active' if page=='resumes' }}"><i>▥</i> Resumes</a>
+    </nav>
+    <div class="sidebar-foot">
+      <div id="mode-flags" class="flags"></div>
+      <div class="actions-stack">
+        <button class="btn btn-ghost btn-sm" data-action="ingest">Ingest screenshots</button>
+        <button class="btn btn-ghost btn-sm" data-action="discover">Run discovery</button>
+        <button class="btn btn-ghost btn-sm" data-action="run-due">Send what's due</button>
+      </div>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <h1>{% block heading %}Dashboard{% endblock %}</h1>
+      <div class="topbar-right">
+        <span id="clock" class="muted mono"></span>
+        <button class="btn btn-sm" data-action="refresh">Refresh</button>
+      </div>
+    </header>
+    <div class="content">
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+</div>
+<div id="toast" class="toast hidden"></div>
+<script src="/static/app.js"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

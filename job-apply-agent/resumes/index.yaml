@@ -1,0 +1,171 @@
+# ============================================================================
+#  Resume registry — the agent picks from exactly these.
+#
+#  Add a resume by dropping the file in this folder and adding an entry.
+#  `file` may be .pdf, .docx or .md. Markdown variants are rendered to PDF on
+#  demand (see jobapply/render.py) so you can keep resumes in version control
+#  as text and still attach a real PDF.
+#
+#  `keywords` drive the fast deterministic scoring pass; `summary` is what
+#  Claude reads when it re-ranks and picks the final variant.
+# ============================================================================
+
+default: cloud-security
+
+resumes:
+  - key: cloud-security
+    role: "Cloud Security Engineer"
+    file: "cloud-security-engineer.md"
+    seniority: senior
+    summary: >
+      Cloud security engineering across AWS/Azure/GCP: IAM design and least-privilege
+      reviews, CSPM/CNAPP rollout, Kubernetes and container hardening, terraform
+      policy-as-code, workload identity, and incident response in cloud estates.
+    keywords:
+      - cloud security
+      - aws
+      - azure
+      - gcp
+      - kubernetes
+      - container security
+      - iam
+      - terraform
+      - cspm
+      - cnapp
+      - zero trust
+      - well-architected
+      - guardduty
+      - security hub
+      - eks
+      - opa
+      - policy as code
+
+  - key: appsec
+    role: "Application Security Engineer"
+    file: "application-security-engineer.md"
+    seniority: senior
+    summary: >
+      Product and application security: threat modelling, secure design review,
+      SAST/DAST/SCA pipeline ownership, secure SDLC coaching for engineering teams,
+      API security, and manual code review across Python, Java and JavaScript.
+    keywords:
+      - application security
+      - appsec
+      - product security
+      - threat modeling
+      - threat modelling
+      - sast
+      - dast
+      - sca
+      - owasp
+      - secure sdlc
+      - code review
+      - api security
+      - burp
+      - semgrep
+      - secure design
+      - vulnerability management
+
+  - key: offensive-security
+    role: "Penetration Tester / Red Team"
+    file: "penetration-tester.md"
+    seniority: senior
+    summary: >
+      Offensive security: network, web, API, cloud and Active Directory penetration
+      testing; red team operations, adversary emulation, C2 tradecraft, exploit
+      development and purple-team exercises. OSCP holder with report-writing depth.
+    keywords:
+      - penetration testing
+      - pentest
+      - red team
+      - offensive security
+      - oscp
+      - exploit development
+      - active directory
+      - adversary emulation
+      - burp suite
+      - metasploit
+      - cobalt strike
+      - purple team
+      - vapt
+      - ethical hacking
+      - social engineering
+
+  - key: detection-engineering
+    role: "Detection Engineer / SOC Engineer"
+    file: "detection-engineer.md"
+    seniority: senior
+    summary: >
+      Detection engineering and security operations: SIEM content development
+      (Splunk, Sentinel, Elastic), Sigma rules, MITRE ATT&CK coverage mapping,
+      EDR tuning, threat hunting, and SOAR automation to cut analyst toil.
+    keywords:
+      - detection engineering
+      - siem
+      - splunk
+      - sentinel
+      - elastic
+      - sigma
+      - mitre att&ck
+      - att&ck
+      - threat hunting
+      - soc
+      - edr
+      - crowdstrike
+      - soar
+      - incident response
+      - blue team
+      - kql
+      - spl
+
+  - key: security-architect
+    role: "Security Architect / Security Lead"
+    file: "security-architect.md"
+    seniority: lead
+    summary: >
+      Security architecture and governance: enterprise security reference
+      architectures, zero-trust programmes, risk management, ISO 27001 / SOC 2 /
+      PCI-DSS compliance, vendor security, and leading engineers across a
+      multi-year security roadmap. CISSP holder.
+    keywords:
+      - security architect
+      - security architecture
+      - cissp
+      - governance
+      - risk
+      - compliance
+      - iso 27001
+      - soc 2
+      - pci dss
+      - nist
+      - zero trust
+      - security strategy
+      - security program
+      - grc
+      - security leadership
+
+  - key: devsecops
+    role: "DevSecOps Engineer"
+    file: "devsecops-engineer.md"
+    seniority: senior
+    summary: >
+      DevSecOps and platform security: shifting security left into CI/CD, supply
+      chain security (SLSA, SBOM, signing), secrets management, infrastructure
+      hardening as code, and building paved-road tooling engineers actually adopt.
+    keywords:
+      - devsecops
+      - ci/cd
+      - github actions
+      - jenkins
+      - gitlab
+      - supply chain security
+      - sbom
+      - slsa
+      - sigstore
+      - secrets management
+      - vault
+      - docker
+      - platform security
+      - shift left
+      - automation
+      - python

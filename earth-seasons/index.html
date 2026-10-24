@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Seasons Globe</title>
+<meta name="description" content="An interactive 3D Earth that shows where the Sun's rays fall through the year: scroll the calendar to watch summer and winter move between the hemispheres.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script type="importmap">
+{ "imports": { "three": "./vendor/three.module.min.js" } }
+</script>
+</head>
+<body>
+<canvas id="scene" aria-label="3D globe showing sunlight and seasons"></canvas>
+<div id="labels" aria-hidden="true"></div>
+
+<header class="brand">
+  <a class="back" href="../" title="Back to portfolio">←</a>
+  <div>
+    <h1>Seasons Globe</h1>
+    <p>Drag to spin the Earth · scroll the calendar to travel through the year · click anywhere on the globe</p>
+  </div>
+</header>
+
+<section class="card info" id="info">
+  <div class="date-row">
+    <div class="date"><span id="dDay">1</span> <span id="dMonth">January</span> <span id="dYear" class="muted">2026</span></div>
+    <div class="clock mono"><span id="dTime">12:00</span> UTC</div>
+  </div>
+  <p class="overhead">Sun directly overhead at <b id="subLat" class="mono">0.0°</b><br><span id="subNote" class="muted">over the Equator</span></p>
+
+  <div class="hemis">
+    <div class="hemi" id="hemiN">
+      <span class="icon"></span>
+      <div><small>Northern Hemisphere</small><strong></strong><em></em></div>
+    </div>
+    <div class="hemi" id="hemiS">
+      <span class="icon"></span>
+      <div><small>Southern Hemisphere</small><strong></strong><em></em></div>
+    </div>
+  </div>
+  <p class="next" id="nextEvent"></p>
+
+  <details class="cities" open>
+    <summary>Daylight &amp; noon sun today</summary>
+    <ul id="cities"></ul>
+  </details>
+</section>
+
+<aside class="card side" id="side">
+  <h2>Earth's orbit <span class="muted">· click to jump</span></h2>
+  <canvas id="orbit" width="280" height="150"></canvas>
+  <div class="cal" id="cal">
+    <div class="cal-head">
+      <button class="icon-btn" id="calPrev" aria-label="Previous month">‹</button>
+      <span id="calTitle">January 2026</span>
+      <button class="icon-btn" id="calNext" aria-label="Next month">›</button>
+    </div>
+    <div class="cal-grid" id="calGrid"></div>
+    <p class="hint">Scroll over the calendar to change month</p>
+  </div>
+</aside>
+
+<button class="icon-btn drawer-btn" id="drawerBtn" aria-label="Show orbit and calendar">📅</button>
+
+<footer class="timeline" id="timeline">
+  <div class="controls">
+    <button class="icon-btn" id="prevMonth" aria-label="Previous month">«</button>
+    <button class="icon-btn" id="prevDay" aria-label="Previous day">‹</button>
+    <button class="icon-btn play" id="play" aria-label="Play the year">▶</button>
+    <button class="icon-btn" id="nextDay" aria-label="Next day">›</button>
+    <button class="icon-btn" id="nextMonth" aria-label="Next month">»</button>
+    <button class="today" id="today">Today</button>
+  </div>
+  <div class="track" id="track" role="slider" tabindex="0" aria-label="Day of year" aria-valuemin="1">
+    <canvas id="trackBg"></canvas>
+    <div class="months" id="months"></div>
+    <div class="events" id="events"></div>
+    <div class="playhead" id="playhead"><span id="playLabel"></span></div>
+  </div>
+  <div class="foot-row">
+    <div class="legend">
+      <span><i class="sw warm"></i>Sun over the north</span>
+      <span><i class="sw cool"></i>Sun over the south</span>
+      <span>Scroll or drag the bar · ← → keys · space to play</span>
+    </div>
+    <div class="toggles" id="toggles">
+      <button data-k="spin" class="on">Spin</button>
+      <button data-k="rays" class="on">Sun rays</button>
+      <button data-k="tint" class="on">Season colours</button>
+      <button data-k="lines" class="on">Latitudes</button>
+      <button data-k="lights" class="on">City lights</button>
+    </div>
+  </div>
+</footer>
+
+<div class="pin-tip" id="pinTip" hidden></div>
+<div class="loading" id="loading">Loading Earth…</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
